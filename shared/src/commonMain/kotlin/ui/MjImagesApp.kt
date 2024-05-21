@@ -74,6 +74,9 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import coil3.annotation.ExperimentalCoilApi
+import coil3.compose.AsyncImage
+import coil3.compose.setSingletonImageLoaderFactory
 import com.seiko.imageloader.LocalImageLoader
 import com.seiko.imageloader.model.ImageResult
 import com.seiko.imageloader.rememberImageAction
@@ -81,14 +84,15 @@ import com.seiko.imageloader.rememberImageActionPainter
 import domain.model.MjImage
 import domain.model.MjImages
 import domain.model.State
-import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
 import ui.theme.AppTheme
 import util.OnBottomReached
 import util.generateImageLoader
+import util.getAsyncImageLoader
 import util.getImageProvider
+import kotlin.math.roundToInt
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class)
 @Composable
 fun MjImagesApp(
     viewModel: MjImagesViewModel
@@ -96,6 +100,10 @@ fun MjImagesApp(
     CompositionLocalProvider(
         LocalImageLoader provides remember { generateImageLoader() },
     ) {
+        setSingletonImageLoaderFactory { context ->
+            getAsyncImageLoader(context)
+        }
+
         val useDarkTheme by viewModel.useDarkTheme.collectAsState(false)
         AppTheme(useDarkTheme = useDarkTheme) {
 
@@ -234,20 +242,23 @@ fun MjImageItem(
             url = image.imageUrl
         )
 
-        val painter = rememberImageActionPainter(action, filterQuality = FilterQuality.None)
-
         val transition by animateFloatAsState(
             targetValue = if (action is ImageResult) 1f else 0f
         )
 
-        Image(painter = painter, contentDescription = null, modifier = Modifier.graphicsLayer {
-            val animatedValue: Float = .8f + (.2f * transition)
-            val blurValue: Float = if (transition == 1f) 1f else 24f + (.2f * transition)
-            scaleX = animatedValue
-            scaleY = animatedValue
-            alpha = animatedValue
-            renderEffect = BlurEffect(blurValue, blurValue)
-        }, contentScale = ContentScale.Crop)
+        AsyncImage(
+            model = image.imageUrl,
+            modifier = Modifier.graphicsLayer {
+                val animatedValue: Float = .8f + (.2f * transition)
+                val blurValue: Float = if (transition == 1f) 1f else 24f + (.2f * transition)
+                scaleX = animatedValue
+                scaleY = animatedValue
+                alpha = animatedValue
+                renderEffect = BlurEffect(blurValue, blurValue)
+            },
+            contentDescription = "",
+            contentScale = ContentScale.FillBounds
+        )
     }
 }
 
