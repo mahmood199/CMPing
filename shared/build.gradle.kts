@@ -80,6 +80,7 @@ kotlin {
 
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.navigation.compose)
+            implementation(libs.koin.compose)
         }
 
         androidMain.dependencies {
