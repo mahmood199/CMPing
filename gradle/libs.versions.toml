@@ -1,9 +1,16 @@
 [versions]
 androidxUiTest = "1.6.7"
 koin = "3.6.0-wasm-alpha2"
+kottie = "1.8.5"
 ktorClient = "3.0.0-wasm2"
 kotlinxCoroutines = "1.8.1"
 coil3 = "3.0.0-alpha06"
+
+lifecycle-viewModel = "2.8.0"
+koinCompose = "3.6.0-alpha3"
+koin-compose-multiplatform = "1.2.0-alpha3"
+navigation-compose = "2.7.0-alpha06"
+compose = "1.6.7"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.6" }
@@ -17,10 +24,14 @@ androidxUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest", vers
 androidxCoreKtx = { module = "androidx.core:core-ktx", version="1.13.1" }
 kmmViewmodelCore = { module = "com.rickclephas.kmm:kmm-viewmodel-core", version="1.0.0-ALPHA-21" }
 imageLoader = { module = "io.github.qdsfdhvh:image-loader", version="1.7.8" }
-koin = { module = "io.insert-koin:koin-android", version.ref="koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref="koin" }
 koinCore = { module = "io.insert-koin:koin-core", version.ref="koin" }
 koinTest = { module = "io.insert-koin:koin-test", version.ref="koin" }
-ktorClient = { module = "io.ktor:ktor-client-android", version.ref="ktorClient" }
+
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose-multiplatform" }
+
+
+ktor-android-client = { module = "io.ktor:ktor-client-android", version.ref="ktorClient" }
 ktorClientJs = { module = "io.ktor:ktor-client-js", version.ref="ktorClient" }
 ktorClientContentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref="ktorClient" }
 ktorClientCore = { module = "io.ktor:ktor-client-core", version.ref="ktorClient" }
@@ -35,7 +46,15 @@ kotlinxCoroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-tes
 kotlinxSerializationCore = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version="1.6.3" }
 multiplatformSettings = { module = "com.russhwolf:multiplatform-settings-no-arg", version="1.1.1" }
 
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+
 coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil3" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
 coil-mp = { module = "io.coil-kt.coil3:coil", version.ref = "coil3" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil3" }
+
+kottie = { module = "io.github.ismai117:kottie", version.ref = "kottie" }
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle-viewModel" }

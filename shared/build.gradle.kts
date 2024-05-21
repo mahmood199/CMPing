@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
-
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -17,7 +15,7 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    js(IR) {
+/*    js(IR) {
         browser()
         binaries.executable()
     }
@@ -26,7 +24,7 @@ kotlin {
     wasmJs {
         browser()
         binaries.executable()
-    }
+    }*/
 
     cocoapods {
         version = "1.0.0"
@@ -46,6 +44,9 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.materialIconsExtended)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
 
             //sharedVm
             api(libs.kmmViewmodelCore)
@@ -75,11 +76,19 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.mp)
             implementation(libs.coil.network.ktor)
+            implementation(libs.kottie)
+
+            implementation(libs.lifecycle.viewmodel)
+            implementation(libs.navigation.compose)
         }
 
         androidMain.dependencies {
-            api(libs.koin)
-            implementation(libs.ktorClient)
+            implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.ktor.android.client)
+
+            api(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
+
         }
 
         iosMain.dependencies {
@@ -90,9 +99,11 @@ kotlin {
             implementation(libs.ktorClientJvm)
         }
 
+/*
         jsMain.dependencies {
             implementation(libs.ktorClientJs)
         }
+*/
 
         commonTest.dependencies {
             implementation(kotlin("test-junit"))
@@ -100,11 +111,13 @@ kotlin {
             implementation(libs.koinTest)
         }
 
+/*
         val wasmJsMain by getting {
             dependencies {
                 implementation(libs.ktorClientWasmJs)
             }
         }
+*/
 
         val androidInstrumentedTest by getting {
             dependencies {

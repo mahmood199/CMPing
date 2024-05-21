@@ -12,6 +12,7 @@ import domain.usecase.MjImagesUseCase
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
+import ui.feature.ListScreenViewModel
 import util.getDispatcherProvider
 
 private val utilityModule = module {
@@ -33,6 +34,10 @@ private val useCaseModule = module {
     factory { MjImagesMapper(get()) }
     factory { MjImagesFetchUseCase() }
     factory { MjImagesUseCase() }
+}
+
+private val viewModelModule = module {
+    factory { ListScreenViewModel(get()) }
 }
 
 private val sharedModules = listOf(useCaseModule, repositoryModule, apiModule, utilityModule)

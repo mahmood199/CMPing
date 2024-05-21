@@ -6,8 +6,8 @@ include(":shared")
 include(":wearApp")
 include(":televisionApp")
 include(":automotiveApp")
-include(":webApp")
-include(":wasmApp")
+//include(":webApp")
+//include(":wasmApp")
 
 pluginManagement {
     repositories {
