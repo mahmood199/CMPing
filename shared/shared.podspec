@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'MidJourney Shared Module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/shared.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target = '14.1'
+    spec.ios.deployment_target = '17.5'
                 
                 
     if !Dir.exist?('build/cocoapods/framework/shared.framework') || Dir.empty?('build/cocoapods/framework/shared.framework')
@@ -46,5 +46,5 @@ Pod::Spec.new do |spec|
             SCRIPT
         }
     ]
-    spec.resources = ['build\compose\cocoapods\compose-resources']
+    spec.resources = ['build/compose/cocoapods/compose-resources']
 end

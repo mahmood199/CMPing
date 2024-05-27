@@ -30,7 +30,7 @@ kotlin {
         version = "1.0.0"
         summary = "MidJourney Shared Module"
         homepage = "Link to the Shared Module homepage"
-        ios.deploymentTarget = "14.1"
+        ios.deploymentTarget = "17.5"
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
@@ -47,6 +47,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation("co.touchlab:stately-concurrent-collections:2.0.0")
 
             //sharedVm
             api(libs.kmmViewmodelCore)
